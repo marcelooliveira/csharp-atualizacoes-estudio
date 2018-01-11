@@ -53,7 +53,7 @@
     <Compile Include="Aula4-UsingStatic\V09\Aluno.cs" />
     <Compile Include="Aula3-OperadorNameOf\V08\Aluno.cs" />
     <Compile Include="Aula3-OperadorNameOf\V07\Aluno.cs" />
-    <Compile Include="Aula2-SintaxeDeExpressao\V06\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V06\Aluno.cs" />
     <Compile Include="Aula1-PropriedadesAutomaticas\V05\Aluno.cs" />
   </ItemGroup>
   <ItemGroup>
