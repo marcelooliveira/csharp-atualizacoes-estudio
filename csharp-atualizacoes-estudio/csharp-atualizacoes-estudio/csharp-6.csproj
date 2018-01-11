@@ -45,14 +45,15 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="V01\Aluno.cs" />
-    <Compile Include="V02\Aluno.cs" />
-    <Compile Include="V03\Aluno.cs" />
-    <Compile Include="V04\Aluno.cs" />
-    <Compile Include="V08\Aluno.cs" />
-    <Compile Include="V07\Aluno.cs" />
-    <Compile Include="V06\Aluno.cs" />
-    <Compile Include="V05\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V01\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V02\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V03\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V04\Aluno.cs" />
+    <Compile Include="Aula4-UsingStatic\V09\Aluno.cs" />
+    <Compile Include="Aula3-OperadorNameOf\V08\Aluno.cs" />
+    <Compile Include="Aula3-OperadorNameOf\V07\Aluno.cs" />
+    <Compile Include="Aula2-SintaxeDeExpressao\V06\Aluno.cs" />
+    <Compile Include="Aula1-PropriedadesAutomaticas\V05\Aluno.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
