@@ -49,6 +49,7 @@
     <Compile Include="V02\Aluno.cs" />
     <Compile Include="V03\Aluno.cs" />
     <Compile Include="V04\Aluno.cs" />
+    <Compile Include="V07\Aluno.cs" />
     <Compile Include="V06\Aluno.cs" />
     <Compile Include="V05\Aluno.cs" />
   </ItemGroup>
