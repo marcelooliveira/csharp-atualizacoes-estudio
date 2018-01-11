@@ -48,12 +48,11 @@
     <Compile Include="V01\Aluno.cs" />
     <Compile Include="V02\Aluno.cs" />
     <Compile Include="V03\Aluno.cs" />
+    <Compile Include="V04\Aluno.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="V04\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
