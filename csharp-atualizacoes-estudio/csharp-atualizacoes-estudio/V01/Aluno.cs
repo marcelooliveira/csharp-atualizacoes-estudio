@@ -10,11 +10,13 @@ namespace csharp_6.V01
     //class Aluno
     //{
     //    private string nome;
+    //    private string sobrenome;
     //    private DateTime dataNascimento;
 
-    //    public Aluno(string nome, DateTime dataNascimento)
+    //    public Aluno(string nome, string sobrenome, DateTime dataNascimento)
     //    {
     //        this.nome = nome;
+    //        this.sobrenome = sobrenome;
     //        this.dataNascimento = dataNascimento;
     //    }
     //}
@@ -24,19 +26,19 @@ namespace csharp_6.V01
     class Aluno
     {
         public string Nome { get; set; }
+        public string Sobrenome { get; set; }
         public DateTime DataNascimento { get; set; }
 
-        public Aluno(string nome, DateTime dataNascimento)
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
             this.Nome = nome;
+            this.Sobrenome = sobrenome;
             this.DataNascimento = dataNascimento;
         }
     }
 
     //Mas isso permitiria modificar o nome após a criação, o que não é nada bom,
     //pois a propriedade não é imutável!
-    //Aluno marty = new Aluno("Marty McFly", new DateTime(1968, 06, 12))
-    //        { Nome = "Biff Tannen" };
-
-
+    //Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12))
+    //        { Nome = "Biff", Sobrenome = "Tannen" };
 }

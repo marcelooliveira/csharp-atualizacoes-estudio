@@ -10,17 +10,20 @@ namespace csharp_6.V04
     //class Aluno
     //{
     //    public string Nome { get;  }
+    //    public string Sobrenome { get;  }
     //    public DateTime DataNascimento { get; }
 
-    //    public Aluno(string nome, DateTime dataNascimento)
+    //    public Aluno(string nome, string sobrenome, DateTime dataNascimento)
     //    {
     //        this.Nome = nome;
+    //        this.Sobrenome = sobrenome;
     //        this.DataNascimento = dataNascimento;
     //    }
 
     //    public override string ToString()
     //    {
-    //        //Nome = "Biff Tannen";
+    //        //Nome = "Tannen";
+    //        //Sobrenome = "Biff";
     //        //a linha acima gera um ERRO:
     //        //error CS0200: Property or indexer 'Aluno.Nome' cannot be assigned to --it is read only
     //        return Nome;
@@ -36,17 +39,20 @@ namespace csharp_6.V04
     {
         private readonly string nome;
         public string Nome { get { return nome; } }
+        public string Sobrenome { get; }
         public DateTime DataNascimento { get; }
 
-        public Aluno(string nome, DateTime dataNascimento)
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
             this.nome = nome;
+            this.Sobrenome = sobrenome;
             this.DataNascimento = dataNascimento;
         }
 
         public override string ToString()
         {
-            //Nome = "Biff Tannen";
+            //Nome = "Biff";
+            //Sobrenome = "Tannen";
             //a linha acima gera um ERRO:
             //error CS0200: Property or indexer 'Aluno.Nome' cannot be assigned to --it is read only
             return Nome;

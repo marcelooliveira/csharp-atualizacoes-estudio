@@ -12,17 +12,20 @@ namespace csharp_6.V03
     //class Aluno
     //{
     //    public string Nome { get; private set; }
+    //    public string Sobrenome { get; private set; }
     //    public DateTime DataNascimento { get; private set; }
 
-    //    public Aluno(string nome, DateTime dataNascimento)
+    //    public Aluno(string nome, string sobrenome, DateTime dataNascimento)
     //    {
     //        this.Nome = nome;
+    //        this.Sobrenome = sobrenome;
     //        this.DataNascimento = dataNascimento;
     //    }
 
     //    public override string ToString()
     //    {
-    //        Nome = "Biff Tannen";
+    //        Nome = "Biff";
+    //        Sobrenome = "Tannen";
     //        return Nome;
     //    }
     //}
@@ -38,11 +41,20 @@ namespace csharp_6.V03
             get { return nome; }
             private set { nome = value; }
         }
+
+        private string sobrenome;
+        public string Sobrenome
+        {
+            get { return sobrenome; }
+            private set { sobrenome = value; }
+        }
+
         public DateTime DataNascimento { get; private set; }
 
-        public Aluno(string nome, DateTime dataNascimento)
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
             this.Nome = nome;
+            this.Sobrenome = sobrenome;
             this.DataNascimento = dataNascimento;
         }
     }
