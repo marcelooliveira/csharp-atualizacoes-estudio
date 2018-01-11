@@ -33,7 +33,8 @@ namespace csharp_6.V01
         }
     }
 
-    //Mas isso permitiria modificar o nome após a criação, o que não é nada bom!
+    //Mas isso permitiria modificar o nome após a criação, o que não é nada bom,
+    //pois a propriedade não é imutável!
     //Aluno marty = new Aluno("Marty McFly", new DateTime(1968, 06, 12))
     //        { Nome = "Biff Tannen" };
 

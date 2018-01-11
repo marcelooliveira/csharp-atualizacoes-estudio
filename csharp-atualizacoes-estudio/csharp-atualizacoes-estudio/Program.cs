@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using csharp_6.V01;
+using csharp_6.V03;
 
 namespace csharp_6
 {
@@ -11,8 +11,12 @@ namespace csharp_6
     {
         static void Main(string[] args)
         {
-            Aluno marty = new Aluno("Marty McFly", new DateTime(1968, 06, 12)) 
-                { Nome = "Biff Tannen" }; 
+            Aluno marty = new Aluno("Marty McFly", new DateTime(1968, 06, 12));
+            Console.WriteLine(marty.Nome);
+            Console.WriteLine(marty);
+            Console.WriteLine(marty.Nome);
+
+            Console.ReadKey();
         }
     }
 }
