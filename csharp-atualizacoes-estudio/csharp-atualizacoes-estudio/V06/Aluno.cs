@@ -28,7 +28,7 @@ namespace csharp_6.V06
 
     //    public string NomeCompleto
     //    {
-    //        get { return Nome + Sobrenome; }
+    //        get { return string.Format("{0}, {1}", Nome, Sobrenome); }
     //    }
     //}
 
@@ -54,7 +54,7 @@ namespace csharp_6.V06
 
     //    public string NomeCompleto
     //    {
-    //        get { return Nome + Sobrenome; }
+    //        get { return string.Format("{0}, {1}", Nome, Sobrenome); }
     //    }
 
     //    public int GetIdade()
@@ -83,7 +83,7 @@ namespace csharp_6.V06
             this.Sobrenome = sobrenome;
         }
 
-        public string NomeCompleto => Nome + Sobrenome;
+        public string NomeCompleto => string.Format("{0}, {1}", Nome, Sobrenome);
 
         public int GetIdade()
             => (int)((DateTime.Now - DataNascimento).TotalDays / 365.242199);
