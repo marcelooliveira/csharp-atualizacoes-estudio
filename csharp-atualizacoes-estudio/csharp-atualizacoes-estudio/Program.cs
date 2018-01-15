@@ -44,9 +44,9 @@ namespace CSharp6e7_roteiro
                 Int32.TryParse(line, out programa);
                 switch (programa)
                 {
-                    //case 1:
-                    //    new CSharp6.R01.Programa().Main();
-                    //    break;
+                    case 1:
+                        new CSharp6.R01.Programa().Main();
+                        break;
                     //case 2:
                     //    new CSharp6.R02.Programa().Main();
                     //    break;
