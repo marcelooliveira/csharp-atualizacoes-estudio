@@ -26,7 +26,7 @@ namespace CSharp6.R02
     {
         public string Nome { get; }
         public string Sobrenome { get; }
-        public DateTime DataNascimento { get; }
+        public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
         public Aluno(string nome, string sobrenome)
         {
