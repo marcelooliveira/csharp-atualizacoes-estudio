@@ -11,8 +11,7 @@ namespace CSharp6.R01
         public void Main()
         {
             Console.WriteLine("1. Propriedades Automáticas Somente-Leitura");
-            Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12))
-                { Nome = "Biff", Sobrenome = "Tannen" };
+            Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12));
 
             Console.WriteLine(marty.Nome);
             Console.WriteLine(marty.Sobrenome);
@@ -21,15 +20,19 @@ namespace CSharp6.R01
 
     class Aluno
     {
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public DateTime DataNascimento { get; set; }
+        private readonly string nome;
+        private readonly string sobrenome;
+        private readonly DateTime dataNascimento;
+
+        public string Nome { get { return nome; } }
+        public string Sobrenome { get { return sobrenome; } }
+        public DateTime DataNascimento { get { return dataNascimento; } }
 
         public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
-            this.DataNascimento = dataNascimento;
+            this.nome = nome;
+            this.sobrenome = sobrenome;
+            this.dataNascimento = dataNascimento;
         }
     }
 }
