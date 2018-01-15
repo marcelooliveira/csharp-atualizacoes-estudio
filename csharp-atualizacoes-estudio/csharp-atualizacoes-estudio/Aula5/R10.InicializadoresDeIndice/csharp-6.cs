@@ -213,20 +213,22 @@ namespace CSharp6.R10
 
     class Avaliacao
     {
-        Dictionary<string, string> materias = new Dictionary<string, string>();
+        Dictionary<string, string> materias = new Dictionary<string, string>
+        {
+            ["MAT"] = "Matemática",
+            ["LPL"] = "Língua Portuguesa",
+            ["FIS"] = "Física",
+            ["HIS"] = "História",
+            ["GEO"] = "Geografia",
+            ["QUI"] = "Química",
+            ["BIO"] = "Biologia"
+        };
 
         public Avaliacao(int bimestre, string materia, double nota)
         {
             Bimestre = bimestre;
             Materia = materia;
             Nota = nota;
-            materias.Add("MAT", "Matemática");
-            materias.Add("LPL", "Língua Portuguesa");
-            materias.Add("FIS", "Física");
-            materias.Add("HIS", "História");
-            materias.Add("GEO", "Geografia");
-            materias.Add("QUI", "Química");
-            materias.Add("BIO", "Biologia");
         }
 
         public int Bimestre { get; }
