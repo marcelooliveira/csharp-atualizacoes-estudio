@@ -28,10 +28,14 @@ namespace CSharp6.R02
         public string Sobrenome { get; }
         public DateTime DataNascimento { get; }
 
-        public Aluno(string nome, string sobrenome, DateTime dataNascimento)
+        public Aluno(string nome, string sobrenome)
         {
             this.Nome = nome;
             this.Sobrenome = sobrenome;
+        }
+
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
+        {
             this.DataNascimento = dataNascimento;
         }
     }
