@@ -25,6 +25,14 @@ namespace CSharp6.R04
         }
     }
 
+    public enum Ano
+    {
+        Primeiro,
+        Segundo,
+        Terceiro,
+        Quarto
+    }
+
     class Aluno
     {
         public string Nome { get; }
@@ -33,6 +41,25 @@ namespace CSharp6.R04
         public string Telefone { get; set; }
 
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
+
+        public Ano AnoNaEscola { get; set; } = Ano.Primeiro;
+
+        public int PontosDeExperiencia()
+        {
+            switch (AnoNaEscola)
+            {
+                case Ano.Primeiro:
+                    return 0;
+                case Ano.Segundo:
+                    return 15;
+                case Ano.Terceiro:
+                    return 65;
+                case Ano.Quarto:
+                    return 80;
+                default:
+                    return 0;
+            }
+        }
 
         public Aluno(string nome, string sobrenome)
         {
