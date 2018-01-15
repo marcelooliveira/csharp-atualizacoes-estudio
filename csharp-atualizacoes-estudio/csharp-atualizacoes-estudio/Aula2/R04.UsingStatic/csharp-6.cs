@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.String;
+using static System.DateTime;
 
 namespace CSharp6.R04
 {
@@ -43,13 +45,13 @@ namespace CSharp6.R04
             this.DataNascimento = dataNascimento;
         }
 
-        public string NomeCompleto => string.Format("{0} {1}", Nome, Sobrenome);
+        public string NomeCompleto => Format("{0} {1}", Nome, Sobrenome);
 
         public int GetIdade()
-            => (int)((DateTime.Now - DataNascimento).TotalDays / 365.242199);
+            => (int)((Now - DataNascimento).TotalDays / 365.242199);
 
         public string DadosPessoais =>
-            string.Format("Nome: {0}, " +
+            Format("Nome: {0}, " +
                 "Endereço: {1}, " +
                 "Telefone: {2}", NomeCompleto, Endereco, Telefone);
     }
