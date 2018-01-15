@@ -43,5 +43,10 @@ namespace CSharp6.R03
         {
             get { return string.Format("{0} {1}", Nome, Sobrenome); }
         }
+
+        public int GetIdade()
+        {
+            return (int)((DateTime.Now - DataNascimento).TotalDays / 365.242199);
+        }
     }
 }
