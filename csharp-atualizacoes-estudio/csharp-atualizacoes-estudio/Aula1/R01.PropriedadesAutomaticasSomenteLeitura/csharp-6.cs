@@ -12,6 +12,10 @@ namespace CSharp6.R01
         {
             Console.WriteLine("1. Propriedades Automáticas Somente-Leitura");
             Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12));
+            //marty.Nome = "Biff";
+            //marty.Sobrenome = "Tannen";
+            //Error CS0272  The property or indexer 'Aluno.Nome' cannot be used in 
+            //this context because the set accessor is inaccessible   
 
             Console.WriteLine(marty.Nome);
             Console.WriteLine(marty.Sobrenome);
@@ -20,19 +24,15 @@ namespace CSharp6.R01
 
     class Aluno
     {
-        private readonly string nome;
-        private readonly string sobrenome;
-        private readonly DateTime dataNascimento;
-
-        public string Nome { get { return nome; } }
-        public string Sobrenome { get { return sobrenome; } }
-        public DateTime DataNascimento { get { return dataNascimento; } }
+        public string Nome { get; private set; }
+        public string Sobrenome { get; private set; }
+        public DateTime DataNascimento { get; private set; }
 
         public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
-            this.nome = nome;
-            this.sobrenome = sobrenome;
-            this.dataNascimento = dataNascimento;
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
+            this.DataNascimento = dataNascimento;
         }
     }
 }
