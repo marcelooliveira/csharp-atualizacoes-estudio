@@ -61,37 +61,39 @@ namespace CSharp6.R11
 
                 //Aluno biff = new Aluno("Biff", "");
 
-                ListaDeMatricula alunos = new ListaDeMatricula();
-                alunos.Matricular(new Aluno("Lessie", "Crosby"));
-                alunos.Matricular(new Aluno("Vicki", "Petty"));
-                alunos.Matricular(new Aluno("Ofelia", "Hobbs"));
-                alunos.Matricular(new Aluno("Leah", "Kinney"));
-                alunos.Matricular(new Aluno("Alton", "Stoker"));
-                alunos.Matricular(new Aluno("Luella", "Ferrell"));
-                alunos.Matricular(new Aluno("Marcy", "Riggs"));
-                alunos.Matricular(new Aluno("Ida", "Bean"));
-                alunos.Matricular(new Aluno("Ollie", "Cottle"));
-                alunos.Matricular(new Aluno("Tommy", "Broadnax"));
-                alunos.Matricular(new Aluno("Jody", "Yates"));
-                alunos.Matricular(new Aluno("Marguerite", "Dawson"));
-                alunos.Matricular(new Aluno("Francisca", "Barnett"));
-                alunos.Matricular(new Aluno("Arlene", "Velasquez"));
-                alunos.Matricular(new Aluno("Jodi", "Green"));
-                alunos.Matricular(new Aluno("Fran", "Mosley"));
-                alunos.Matricular(new Aluno("Taylor", "Nesmith"));
-                alunos.Matricular(new Aluno("Ernesto", "Greathouse"));
-                alunos.Matricular(new Aluno("Margret", "Albert"));
-                alunos.Matricular(new Aluno("Pansy", "House"));
-                alunos.Matricular(new Aluno("Sharon", "Byrd"));
-                alunos.Matricular(new Aluno("Keith", "Roldan"));
-                alunos.Matricular(new Aluno("Martha", "Miranda"));
-                alunos.Matricular(new Aluno("Kari", "Campos"));
-                alunos.Matricular(new Aluno("Muriel", "Middleton"));
-                alunos.Matricular(new Aluno("Georgette", "Jarvis"));
-                alunos.Matricular(new Aluno("Pam", "Boyle"));
-                alunos.Matricular(new Aluno("Deena", "Travis"));
-                alunos.Matricular(new Aluno("Cary", "Totten"));
-                alunos.Matricular(new Aluno("Althea", "Goodwin"));
+                ListaDeMatricula alunos = new ListaDeMatricula
+                {
+                    new Aluno("Lessie", "Crosby"),
+                    new Aluno("Vicki", "Petty"),
+                    new Aluno("Ofelia", "Hobbs"),
+                    new Aluno("Leah", "Kinney"),
+                    new Aluno("Alton", "Stoker"),
+                    new Aluno("Luella", "Ferrell"),
+                    new Aluno("Marcy", "Riggs"),
+                    new Aluno("Ida", "Bean"),
+                    new Aluno("Ollie", "Cottle"),
+                    new Aluno("Tommy", "Broadnax"),
+                    new Aluno("Jody", "Yates"),
+                    new Aluno("Marguerite", "Dawson"),
+                    new Aluno("Francisca", "Barnett"),
+                    new Aluno("Arlene", "Velasquez"),
+                    new Aluno("Jodi", "Green"),
+                    new Aluno("Fran", "Mosley"),
+                    new Aluno("Taylor", "Nesmith"),
+                    new Aluno("Ernesto", "Greathouse"),
+                    new Aluno("Margret", "Albert"),
+                    new Aluno("Pansy", "House"),
+                    new Aluno("Sharon", "Byrd"),
+                    new Aluno("Keith", "Roldan"),
+                    new Aluno("Martha", "Miranda"),
+                    new Aluno("Kari", "Campos"),
+                    new Aluno("Muriel", "Middleton"),
+                    new Aluno("Georgette", "Jarvis"),
+                    new Aluno("Pam", "Boyle"),
+                    new Aluno("Deena", "Travis"),
+                    new Aluno("Cary", "Totten"),
+                    new Aluno("Althea", "Goodwin")
+                };
 
                 Console.WriteLine();
                 Console.WriteLine("ALUNOS DA TURMA");
@@ -144,6 +146,12 @@ namespace CSharp6.R11
         {
             return ((IEnumerable<Aluno>)todosAlunos).GetEnumerator();
         }
+    }
+
+    static class AlunoExtensions
+    {
+        public static void Add(this ListaDeMatricula e, Aluno s)
+            => e.Matricular(s);
     }
 
     public enum Ano
