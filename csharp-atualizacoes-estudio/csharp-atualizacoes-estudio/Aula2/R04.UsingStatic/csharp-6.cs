@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.String;
 using static System.DateTime;
+using static CSharp6.R04.Ano;
 
 namespace CSharp6.R04
 {
@@ -42,19 +43,19 @@ namespace CSharp6.R04
 
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
-        public Ano AnoNaEscola { get; set; } = Ano.Primeiro;
+        public Ano AnoNaEscola { get; set; } = Primeiro;
 
         public int PontosDeExperiencia()
         {
             switch (AnoNaEscola)
             {
-                case Ano.Primeiro:
+                case Primeiro:
                     return 0;
-                case Ano.Segundo:
+                case Segundo:
                     return 15;
-                case Ano.Terceiro:
+                case Terceiro:
                     return 65;
-                case Ano.Quarto:
+                case Quarto:
                     return 80;
                 default:
                     return 0;
