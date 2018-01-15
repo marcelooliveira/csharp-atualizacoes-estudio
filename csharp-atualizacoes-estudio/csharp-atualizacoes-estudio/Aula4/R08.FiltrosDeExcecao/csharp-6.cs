@@ -142,17 +142,19 @@ namespace CSharp6.R08
 
         public Aluno(string nome, string sobrenome)
         {
-            if (string.IsNullOrEmpty(nome))
-            {
-                throw new ArgumentException("Parâmetro não informado", nameof(nome));
-            }
-            if (string.IsNullOrEmpty(sobrenome))
-            {
-                throw new ArgumentException("Parâmetro não informado", nameof(sobrenome));
-            }
+            VerificarParametro(nome, nameof(nome));
+            VerificarParametro(sobrenome, nameof(sobrenome));
 
             this.Nome = nome;
             this.Sobrenome = sobrenome;
+        }
+
+        private static void VerificarParametro(string valorDoParametro, string nomeDoParametro)
+        {
+            if (string.IsNullOrEmpty(valorDoParametro))
+            {
+                throw new ArgumentException("Parâmetro não informado", nomeDoParametro);
+            }
         }
 
         public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
@@ -182,7 +184,9 @@ namespace CSharp6.R08
         {
             avaliacoes.Add(avaliacao);
         }
+
     }
+
 
 
     static class PropertyChangedExtensions
