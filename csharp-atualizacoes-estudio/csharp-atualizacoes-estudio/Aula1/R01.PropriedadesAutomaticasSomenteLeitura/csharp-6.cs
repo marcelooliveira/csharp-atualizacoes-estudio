@@ -24,21 +24,22 @@ namespace CSharp6.R01
 
     class Aluno
     {
-        public string Nome { get; }
+        private readonly string nome;
+        public string Nome { get { return nome; } }
         public string Sobrenome { get; }
         public DateTime DataNascimento { get; }
 
         public Aluno(string nome, string sobrenome, DateTime dataNascimento)
         {
-            this.Nome = nome;
+            this.nome = nome;
             this.Sobrenome = sobrenome;
             this.DataNascimento = dataNascimento;
         }
 
         public override string ToString()
         {
-            //Nome = "Tannen";
-            //Sobrenome = "Biff";
+            //Nome = "Biff";
+            //Sobrenome = "Tannen";
             //a linha acima gera um ERRO:
             //error CS0200: Property or indexer 'Aluno.Nome' cannot be assigned to --it is read only
             return Nome;
