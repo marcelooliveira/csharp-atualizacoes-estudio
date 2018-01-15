@@ -79,6 +79,7 @@ namespace CSharp6.R07
                 {
                     endereco = value;
                     PropertyChanged.Call(this);
+                    PropertyChanged.Call(this, nameof(DadosPessoais));
                 }
             }
         }
@@ -93,6 +94,7 @@ namespace CSharp6.R07
                 {
                     telefone = value;
                     PropertyChanged.Call(this);
+                    PropertyChanged.Call(this, nameof(DadosPessoais));
                 }
             }
         }
@@ -152,6 +154,7 @@ namespace CSharp6.R07
             avaliacoes.Add(avaliacao);
         }
     }
+
 
     static class PropertyChangedExtensions
     {
