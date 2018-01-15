@@ -8,6 +8,7 @@ using static System.DateTime;
 using static CSharp6.R07.Ano;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CSharp6.R07
 {
@@ -77,17 +78,7 @@ namespace CSharp6.R07
                 if (endereco != value)
                 {
                     endereco = value;
-
-                    //if (PropertyChanged != null)
-                    //{
-                    //    PropertyChanged(this, new PropertyChangedEventArgs("Endereco"));
-                    //}
-
-                    //
-                    //refatorado para a linha abaixo!
-                    //
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Endereco)));
-
+                    PropertyChanged.Call(this);
                 }
             }
         }
@@ -98,8 +89,11 @@ namespace CSharp6.R07
             get { return telefone; }
             set
             {
-                telefone = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Telefone)));
+                if (endereco != value)
+                {
+                    telefone = value;
+                    PropertyChanged.Call(this);
+                }
             }
         }
 
@@ -159,7 +153,17 @@ namespace CSharp6.R07
         }
     }
 
-
+    static class PropertyChangedExtensions
+    {
+        public static void Call(this PropertyChangedEventHandler handler,
+            object sender, [CallerMemberName] string propertyName = null)
+        {
+            if (handler != null)
+            {
+                handler.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
 
     class Avaliacao
     {
