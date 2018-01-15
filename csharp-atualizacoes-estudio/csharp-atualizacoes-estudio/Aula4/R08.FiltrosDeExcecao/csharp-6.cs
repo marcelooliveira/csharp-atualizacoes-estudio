@@ -51,16 +51,9 @@ namespace CSharp6.R08
 
                 Aluno biff = new Aluno("Biff", "");
             }
-            catch (ArgumentException exc)
+            catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
             {
-                if (exc.Message.Contains("não informado"))
-                {
-                    Console.WriteLine($"ERRO: O parâmetro '{exc.ParamName}' não foi informado!");
-                }
-                else
-                {
-                    Console.WriteLine(exc.ToString());
-                }
+                Console.WriteLine($"ERRO: O parâmetro '{exc.ParamName}' não foi informado!");
             }
             catch (Exception exc)
             {
@@ -186,6 +179,7 @@ namespace CSharp6.R08
         }
 
     }
+
 
 
 
