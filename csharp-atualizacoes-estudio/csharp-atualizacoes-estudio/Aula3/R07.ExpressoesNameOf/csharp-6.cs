@@ -78,10 +78,16 @@ namespace CSharp6.R07
                 {
                     endereco = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Endereco"));
-                    }
+                    //if (PropertyChanged != null)
+                    //{
+                    //    PropertyChanged(this, new PropertyChangedEventArgs("Endereco"));
+                    //}
+
+                    //
+                    //refatorado para a linha abaixo!
+                    //
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Endereco)));
+
                 }
             }
         }
@@ -93,11 +99,7 @@ namespace CSharp6.R07
             set
             {
                 telefone = value;
-
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Telefone"));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Telefone)));
             }
         }
 
@@ -121,7 +123,6 @@ namespace CSharp6.R07
                     return 0;
             }
         }
-
 
         public Aluno(string nome, string sobrenome)
         {
@@ -157,6 +158,7 @@ namespace CSharp6.R07
             avaliacoes.Add(avaliacao);
         }
     }
+
 
 
     class Avaliacao
