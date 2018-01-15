@@ -34,5 +34,12 @@ namespace CSharp6.R01
             this.Sobrenome = sobrenome;
             this.DataNascimento = dataNascimento;
         }
+
+        public override string ToString()
+        {
+            Nome = "Biff";
+            Sobrenome = "Tannen";
+            return Nome;
+        }
     }
 }
