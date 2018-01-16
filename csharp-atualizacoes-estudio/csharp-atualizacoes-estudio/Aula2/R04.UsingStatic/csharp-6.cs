@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
+using static System.String;
+using static System.DateTime;
 
 namespace CSharp6.R04
 {
@@ -10,14 +13,19 @@ namespace CSharp6.R04
     {
         public void Main()
         {
-            Console.WriteLine("4. Using Static");
+            WriteLine("4. Using Static");
 
-            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12));
-            Console.WriteLine(aluno.Nome);
-            Console.WriteLine(aluno.Sobrenome);
+            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+            {
+                Endereco = "9303 Lyon Drive Hill Valley CA",
+                Telefone = "555-4385"
+            };
+            WriteLine(aluno.Nome);
+            WriteLine(aluno.Sobrenome);
 
-            Console.WriteLine(aluno.NomeCompleto);
-            Console.WriteLine("Idade: {0}", aluno.GetIdade());
+            WriteLine(aluno.NomeCompleto);
+            WriteLine("Idade: {0}", aluno.GetIdade());
+            WriteLine(aluno.DadosPessoais);
         }
     }
 
@@ -27,12 +35,19 @@ namespace CSharp6.R04
 
         public string Sobrenome { get; }
 
+        public string Endereco { get; set; }
+
+        public string Telefone { get; set; }
+
+        public string DadosPessoais =>
+                 Format("{0}, {1}, {2}", NomeCompleto, Endereco, Telefone);
+
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
         public string NomeCompleto => Nome + " " + Sobrenome;
 
         public int GetIdade()
-            => (int)(((DateTime.Now - DataNascimento).TotalDays) / 365.242199);
+            => (int)(((Now - DataNascimento).TotalDays) / 365.242199);
 
         public Aluno(string nome, string sobrenome)
         {
