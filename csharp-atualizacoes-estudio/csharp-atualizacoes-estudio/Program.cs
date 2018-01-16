@@ -50,9 +50,9 @@ namespace CSharp6e7_roteiro
                     case 2:
                         new CSharp6.R02.Programa().Main();
                         break;
-                    //case 3:
-                    //    new CSharp6.R03.Programa().Main();
-                    //    break;
+                    case 3:
+                        new CSharp6.R03.Programa().Main();
+                        break;
                     //case 4:
                     //    new CSharp6.R04.Programa().Main();
                     //    break;
