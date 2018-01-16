@@ -16,7 +16,8 @@ namespace CSharp6.R03
             Console.WriteLine(aluno.Nome);
             Console.WriteLine(aluno.Sobrenome);
 
-            Console.WriteLine(aluno.ToString());
+            Console.WriteLine(aluno.NomeCompleto);
+            Console.WriteLine("Idade: {0}", aluno.GetIdade());
         }
     }
 
@@ -27,6 +28,11 @@ namespace CSharp6.R03
         public string Sobrenome { get; }
 
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
+
+        public string NomeCompleto => Nome + " " + Sobrenome; 
+        
+        public int GetIdade()
+            => (int)(((DateTime.Now - DataNascimento).TotalDays) / 365.242199);
 
         public Aluno(string nome, string sobrenome)
         {
