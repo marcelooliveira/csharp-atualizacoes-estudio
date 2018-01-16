@@ -16,11 +16,6 @@ namespace CSharp6.R02
             Console.WriteLine(aluno.Nome);
             Console.WriteLine(aluno.Sobrenome);
 
-            //aluno.Nome = "Biff";
-            //aluno.Sobrenome = "Tannen";
-            //Console.WriteLine(aluno.Nome);
-            //Console.WriteLine(aluno.Sobrenome);
-
             Console.WriteLine(aluno.ToString());
         }
     }
@@ -31,20 +26,18 @@ namespace CSharp6.R02
 
         public string Sobrenome { get; }
 
-        public DateTime DataNascimento { get; }
+        public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
-        public Aluno(string nome, string sobrenome, DateTime dataNascimento)
+        public Aluno(string nome, string sobrenome)
         {
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
+            Nome = nome;
+            Sobrenome = sobrenome;
+        }
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento) :
+            this(nome, sobrenome)
+        {
             this.DataNascimento = dataNascimento;
         }
 
-        //public override string ToString()
-        //{
-        //    this.Nome = "novo nome";
-        //    this.Sobrenome = "novo sobrenome";
-        //    return string.Format("{0} {1}", Nome, Sobrenome);
-        //}
     }
 }
