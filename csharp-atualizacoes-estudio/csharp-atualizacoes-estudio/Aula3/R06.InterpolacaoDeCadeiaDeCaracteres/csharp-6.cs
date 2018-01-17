@@ -57,7 +57,7 @@ namespace CSharp6.R06
         public string Telefone { get; set; }
 
         public string DadosPessoais =>
-                 Format("{0}, {1}, {2}", NomeCompleto, Endereco, Telefone);
+                 $"Nome: {NomeCompleto}, Endereço: {Endereco}, Telefone: {Telefone}, Data de Nascimento: {DataNascimento:dd/MM/yyyy}";
 
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
