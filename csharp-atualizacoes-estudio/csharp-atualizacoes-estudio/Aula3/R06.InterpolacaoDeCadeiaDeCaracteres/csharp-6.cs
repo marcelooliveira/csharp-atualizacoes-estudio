@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 using static System.String;
 using static System.DateTime;
-using static CSharp6.R06.Ano;
 using System.Collections.ObjectModel;
 
 namespace CSharp6.R06
@@ -14,96 +14,68 @@ namespace CSharp6.R06
     {
         public void Main()
         {
-            Console.WriteLine("6. Interpolação De Cadeia De Caracteres");
+            WriteLine("6. Interpolação De Cadeia De Caracteres");
 
-            Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12))
+            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
             {
                 Endereco = "9303 Lyon Drive Hill Valley CA",
                 Telefone = "555-4385"
             };
+            WriteLine(aluno.Nome);
+            WriteLine(aluno.Sobrenome);
 
-            Console.WriteLine(marty.Nome);
-            Console.WriteLine(marty.Sobrenome);
-            Console.WriteLine(marty.DadosPessoais);
+            WriteLine(aluno.NomeCompleto);
+            WriteLine("Idade: {0}", aluno.GetIdade());
+            WriteLine(aluno.DadosPessoais);
 
-            Avaliacao melhorAvaliacao = GetMelhorNota(marty);
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 7));
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+            ImprimirMelhorNota(aluno);
 
-            Console.WriteLine("Melhor Nota: {0}", melhorAvaliacao?.Nota);
+            Aluno aluno2 = new Aluno("Bart", "Simpson");
 
-            marty.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
-            marty.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 6));
-            marty.AdicionarAvaliacao(new Avaliacao(1, "História", 7));
+            ImprimirMelhorNota(aluno2);
 
-            melhorAvaliacao = GetMelhorNota(marty);
-
-            Console.WriteLine("Melhor Nota: {0}", melhorAvaliacao?.Nota);
         }
 
-        private static Avaliacao GetMelhorNota(Aluno marty)
+        private static void ImprimirMelhorNota(Aluno aluno)
         {
-            return marty.Avaliacoes
-                .OrderByDescending(a => a.Nota)
-                .FirstOrDefault();
+            Console.WriteLine("Melhor nota: {0}",
+                aluno?.MelhorAvaliacao?.Nota);
         }
-    }
-
-    public enum Ano
-    {
-        Primeiro,
-        Segundo,
-        Terceiro,
-        Quarto
     }
 
     class Aluno
     {
         public string Nome { get; }
+
         public string Sobrenome { get; }
+
         public string Endereco { get; set; }
+
         public string Telefone { get; set; }
+
+        public string DadosPessoais =>
+                 Format("{0}, {1}, {2}", NomeCompleto, Endereco, Telefone);
 
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
-        public Ano AnoNaEscola { get; set; } = Primeiro;
+        public string NomeCompleto => Nome + " " + Sobrenome;
 
-        public int PontosDeExperiencia()
-        {
-            switch (AnoNaEscola)
-            {
-                case Primeiro:
-                    return 0;
-                case Segundo:
-                    return 15;
-                case Terceiro:
-                    return 65;
-                case Quarto:
-                    return 80;
-                default:
-                    return 0;
-            }
-        }
+        public int GetIdade()
+            => (int)(((Now - DataNascimento).TotalDays) / 365.242199);
 
         public Aluno(string nome, string sobrenome)
         {
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
+            Nome = nome;
+            Sobrenome = sobrenome;
         }
-
-        public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento) :
+            this(nome, sobrenome)
         {
             this.DataNascimento = dataNascimento;
         }
-
-        public string NomeCompleto => $"{Nome} {Sobrenome}";
-
-        public int GetIdade()
-            => (int)((Now - DataNascimento).TotalDays / 365.242199);
-
-        public string DadosPessoais =>
-            $"Nome: {NomeCompleto}, " +
-            $"Nascimento: {DataNascimento:dd/MM/yyyy}, " +
-            $"Endereço: {Endereco}, " +
-            $"Telefone: {Telefone}";
 
         private IList<Avaliacao> avaliacoes = new List<Avaliacao>();
         public IReadOnlyCollection<Avaliacao> Avaliacoes
@@ -113,6 +85,9 @@ namespace CSharp6.R06
         {
             avaliacoes.Add(avaliacao);
         }
+
+        public Avaliacao MelhorAvaliacao =>
+            avaliacoes.OrderBy(a => a.Nota).LastOrDefault();
     }
 
     class Avaliacao
@@ -128,5 +103,4 @@ namespace CSharp6.R06
         public string Materia { get; }
         public double Nota { get; }
     }
-
 }
