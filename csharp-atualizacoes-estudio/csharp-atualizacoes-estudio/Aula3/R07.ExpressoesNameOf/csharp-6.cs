@@ -8,6 +8,7 @@ using static System.String;
 using static System.DateTime;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CSharp6.R07
 {
@@ -72,9 +73,15 @@ namespace CSharp6.R07
                 if (endereco != value)
                 {
                     endereco = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Endereco"));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
+        }
+
+        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string telefone;
@@ -87,7 +94,8 @@ namespace CSharp6.R07
                 if (telefone != value)
                 {
                     telefone = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Telefone"));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
