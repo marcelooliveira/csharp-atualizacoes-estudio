@@ -7,6 +7,7 @@ using static System.Console;
 using static System.String;
 using static System.DateTime;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace CSharp6.R07
 {
@@ -37,6 +38,15 @@ namespace CSharp6.R07
 
             ImprimirMelhorNota(aluno2);
 
+            aluno.PropertyChanged += Aluno_PropertyChanged;
+
+            aluno.Endereco = "Rua Vergueiro, 3185";
+            aluno.Telefone = "555-1234";
+        }
+
+        private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Console.WriteLine($"Propriedade {e.PropertyName} foi alterada!");
         }
 
         private static void ImprimirMelhorNota(Aluno aluno)
@@ -46,15 +56,42 @@ namespace CSharp6.R07
         }
     }
 
-    class Aluno
+    class Aluno : INotifyPropertyChanged
     {
         public string Nome { get; }
 
         public string Sobrenome { get; }
 
-        public string Endereco { get; set; }
+        private string endereco;
 
-        public string Telefone { get; set; }
+        public string Endereco
+        {
+            get { return endereco; }
+            set
+            {
+                if (endereco != value)
+                {
+                    endereco = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Endereco"));
+                }
+            }
+        }
+
+        private string telefone;
+
+        public string Telefone
+        {
+            get { return telefone; }
+            set
+            {
+                if (telefone != value)
+                {
+                    telefone = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Telefone"));
+                }
+            }
+        }
+
 
         public string DadosPessoais =>
                  $"Nome: {NomeCompleto}, Endereço: {Endereco}, Telefone: {Telefone}, Data de Nascimento: {DataNascimento:dd/MM/yyyy}";
@@ -78,6 +115,9 @@ namespace CSharp6.R07
         }
 
         private IList<Avaliacao> avaliacoes = new List<Avaliacao>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public IReadOnlyCollection<Avaliacao> Avaliacoes
             => new ReadOnlyCollection<Avaliacao>(avaliacoes);
 
