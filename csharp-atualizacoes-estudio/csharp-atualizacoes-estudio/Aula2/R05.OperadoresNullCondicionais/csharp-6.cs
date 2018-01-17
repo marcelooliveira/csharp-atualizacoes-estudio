@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using static System.Console;
 using static System.String;
 using static System.DateTime;
+using System.Collections.ObjectModel;
 
 namespace CSharp6.R05
 {
@@ -60,5 +61,30 @@ namespace CSharp6.R05
             this.DataNascimento = dataNascimento;
         }
 
+        private IList<Avaliacao> avaliacoes = new List<Avaliacao>();
+        public IReadOnlyCollection<Avaliacao> Avaliacoes
+            => new ReadOnlyCollection<Avaliacao>(avaliacoes);
+
+        public void AdicionarAvaliacao(Avaliacao avaliacao)
+        {
+            avaliacoes.Add(avaliacao);
+        }
+
+        public Avaliacao MelhorAvaliacao =>
+            avaliacoes.OrderBy(a => a.Nota).LastOrDefault();
+    }
+
+    class Avaliacao
+    {
+        public Avaliacao(int bimestre, string materia, double nota)
+        {
+            Bimestre = bimestre;
+            Materia = materia;
+            Nota = nota;
+        }
+
+        public int Bimestre { get; }
+        public string Materia { get; }
+        public double Nota { get; }
     }
 }
