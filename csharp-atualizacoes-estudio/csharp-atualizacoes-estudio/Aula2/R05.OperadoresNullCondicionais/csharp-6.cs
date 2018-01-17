@@ -27,6 +27,22 @@ namespace CSharp6.R05
             WriteLine(aluno.NomeCompleto);
             WriteLine("Idade: {0}", aluno.GetIdade());
             WriteLine(aluno.DadosPessoais);
+
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 7));
+            aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+            ImprimirMelhorNota(aluno);
+
+            Aluno aluno2 = new Aluno("Bart", "Simpson");
+
+            ImprimirMelhorNota(aluno2);
+
+        }
+
+        private static void ImprimirMelhorNota(Aluno aluno)
+        {
+            Console.WriteLine("Melhor nota: {0}",
+                aluno?.MelhorAvaliacao?.Nota);
         }
     }
 
