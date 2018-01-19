@@ -18,33 +18,49 @@ namespace CSharp6.R08
         {
             WriteLine("8. Filtros De Exceção");
 
-            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+            try
             {
-                Endereco = "9303 Lyon Drive Hill Valley CA",
-                Telefone = "555-4385"
-            };
-            WriteLine(aluno.Nome);
-            WriteLine(aluno.Sobrenome);
+                Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+                {
+                    Endereco = "9303 Lyon Drive Hill Valley CA",
+                    Telefone = "555-4385"
+                };
+                WriteLine(aluno.Nome);
+                WriteLine(aluno.Sobrenome);
 
-            WriteLine(aluno.NomeCompleto);
-            WriteLine("Idade: {0}", aluno.GetIdade());
-            WriteLine(aluno.DadosPessoais);
+                WriteLine(aluno.NomeCompleto);
+                WriteLine("Idade: {0}", aluno.GetIdade());
+                WriteLine(aluno.DadosPessoais);
 
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 7));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
-            ImprimirMelhorNota(aluno);
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 7));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+                ImprimirMelhorNota(aluno);
 
-            Aluno aluno2 = new Aluno("Bart", "Simpson");
+                Aluno aluno2 = new Aluno("Bart", "Simpson");
 
-            ImprimirMelhorNota(aluno2);
+                ImprimirMelhorNota(aluno2);
 
-            aluno.PropertyChanged += Aluno_PropertyChanged;
+                aluno.PropertyChanged += Aluno_PropertyChanged;
 
-            aluno.Endereco = "Rua Vergueiro, 3185";
-            aluno.Telefone = "555-1234";
+                aluno.Endereco = "Rua Vergueiro, 3185";
+                aluno.Telefone = "555-1234";
 
-            Aluno aluno3 = new Aluno("Charlie", "");
+                Aluno aluno3 = new Aluno("Charlie", "");
+
+            }
+            catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
+            {
+                Console.WriteLine($"Parâmetro {exc.ParamName} não foi informado!");
+            }
+            catch (ArgumentException exc)
+            {
+                Console.WriteLine("Parâmetro com problema!");
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+            }
         }
 
         private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
