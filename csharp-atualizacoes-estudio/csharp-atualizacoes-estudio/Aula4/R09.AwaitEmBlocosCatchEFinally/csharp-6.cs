@@ -9,22 +9,29 @@ using static System.DateTime;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace CSharp6.R09
 {
     class Programa
     {
-        public void Main()
+        public async void Main()
         {
             WriteLine("9. Await Em Blocos Catch E Finally");
 
+            StreamWriter logAplicacao = new StreamWriter("LogAplicacao.txt");
+
             try
             {
+                await logAplicacao.WriteLineAsync("Aplicação está iniciando...");
                 Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
                 {
                     Endereco = "9303 Lyon Drive Hill Valley CA",
                     Telefone = "555-4385"
                 };
+
+                await logAplicacao.WriteLineAsync("Aluno Marty McFly foi criado...");
+
                 WriteLine(aluno.Nome);
                 WriteLine(aluno.Sobrenome);
 
@@ -38,7 +45,7 @@ namespace CSharp6.R09
                 ImprimirMelhorNota(aluno);
 
                 Aluno aluno2 = new Aluno("Bart", "Simpson");
-
+                await logAplicacao.WriteLineAsync("Aluno Bart Simpson foi criado...");
                 ImprimirMelhorNota(aluno2);
 
                 aluno.PropertyChanged += Aluno_PropertyChanged;
@@ -47,19 +54,30 @@ namespace CSharp6.R09
                 aluno.Telefone = "555-1234";
 
                 Aluno aluno3 = new Aluno("Charlie", "");
+                await logAplicacao.WriteLineAsync("Aluno Charlie Brown foi criado...");
 
             }
             catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
             {
-                Console.WriteLine($"Parâmetro {exc.ParamName} não foi informado!");
+                string msg = $"Parâmetro {exc.ParamName} não foi informado!";
+                await logAplicacao.WriteLineAsync(msg);
+                Console.WriteLine(msg);
             }
             catch (ArgumentException exc)
             {
-                Console.WriteLine("Parâmetro com problema!");
+                const string msg = "Parâmetro com problema!";
+                await logAplicacao.WriteLineAsync(msg);
+                Console.WriteLine(msg);
             }
             catch (Exception exc)
             {
+                await logAplicacao.WriteLineAsync(exc.ToString());
                 Console.WriteLine(exc.ToString());
+            }
+            finally
+            {
+                await logAplicacao.WriteLineAsync("Aplicação terminou.");
+                logAplicacao.Dispose();
             }
         }
 
