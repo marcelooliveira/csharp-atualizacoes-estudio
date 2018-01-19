@@ -43,6 +43,8 @@ namespace CSharp6.R08
 
             aluno.Endereco = "Rua Vergueiro, 3185";
             aluno.Telefone = "555-1234";
+
+            Aluno aluno3 = new Aluno("Charlie", "");
         }
 
         private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -113,9 +115,21 @@ namespace CSharp6.R08
 
         public Aluno(string nome, string sobrenome)
         {
+            VerificarParametroPreenchido(nome, nameof(nome));
+            VerificarParametroPreenchido(sobrenome, nameof(sobrenome));
+
             Nome = nome;
             Sobrenome = sobrenome;
         }
+
+        private static void VerificarParametroPreenchido(string valorParametro, string nomeParametro)
+        {
+            if (IsNullOrEmpty(valorParametro))
+            {
+                throw new ArgumentException("Parâmetro não informado!", nomeParametro);
+            }
+        }
+
         public Aluno(string nome, string sobrenome, DateTime dataNascimento) :
             this(nome, sobrenome)
         {
