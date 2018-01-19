@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.IO;
+using System.Collections;
 
 namespace CSharp6.R11
 {
@@ -59,9 +60,21 @@ namespace CSharp6.R11
                 aluno.Endereco = "Rua Vergueiro, 3185";
                 aluno.Telefone = "555-1234";
 
-                Aluno aluno3 = new Aluno("Charlie", "");
+                Aluno aluno3 = new Aluno("Charlie", "Brown");
                 await logAplicacao.WriteLineAsync("Aluno Charlie Brown foi criado...");
 
+                ListaDeMatricula listaDeMatricula = new ListaDeMatricula();
+                listaDeMatricula.Matricular(aluno);
+                listaDeMatricula.Matricular(aluno2);
+                listaDeMatricula.Matricular(aluno3);
+
+                Console.WriteLine("ALUNOS DA LISTA");
+                Console.WriteLine("===============");
+
+                foreach (var a in listaDeMatricula)
+                {
+                    Console.WriteLine(a.DadosPessoais);
+                }
             }
             catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
             {
@@ -220,6 +233,26 @@ namespace CSharp6.R11
         {
             return $"Bimestre: {Bimestre}, Materia: {materias[CodigoMateria]}" +
                 $", Nota: {Nota}";
+        }
+    }
+
+    class ListaDeMatricula : IEnumerable<Aluno>
+    {
+        private List<Aluno> alunos = new List<Aluno>();
+
+        public IEnumerator<Aluno> GetEnumerator()
+        {
+            return ((IEnumerable<Aluno>)alunos).GetEnumerator();
+        }
+
+        public void Matricular(Aluno aluno)
+        {
+            alunos.Add(aluno);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<Aluno>)alunos).GetEnumerator();
         }
     }
 }
