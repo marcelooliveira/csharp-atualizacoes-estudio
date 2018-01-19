@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 using static System.String;
 using static System.DateTime;
-using static CSharp6.R11.Ano;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.IO;
-using System.Collections;
 
 namespace CSharp6.R11
 {
@@ -18,156 +17,96 @@ namespace CSharp6.R11
     {
         public async void Main()
         {
-            Console.WriteLine("11. Metodos De Extensão Para Inicializadores De Coleção");
+            WriteLine("11. Metodos De Extensão Para Inicializadores De Coleção");
 
-            StreamWriter logger = new StreamWriter("LogDoCurso.txt");
+            StreamWriter logAplicacao = new StreamWriter("LogAplicacao.txt");
+
             try
             {
-                Aluno marty = new Aluno("Marty", "McFly", new DateTime(1968, 06, 12))
+                await logAplicacao.WriteLineAsync("Aplicação está iniciando...");
+                Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
                 {
                     Endereco = "9303 Lyon Drive Hill Valley CA",
                     Telefone = "555-4385"
                 };
 
-                await logger.WriteLineAsync("Aluno Marty McFly criado");
+                await logAplicacao.WriteLineAsync("Aluno Marty McFly foi criado...");
 
-                Console.WriteLine(marty.Nome);
-                Console.WriteLine(marty.Sobrenome);
-                Console.WriteLine(marty.DadosPessoais);
+                WriteLine(aluno.Nome);
+                WriteLine(aluno.Sobrenome);
 
-                Avaliacao melhorAvaliacao = GetMelhorNota(marty);
+                WriteLine(aluno.NomeCompleto);
+                WriteLine("Idade: {0}", aluno.GetIdade());
+                WriteLine(aluno.DadosPessoais);
 
-                Console.WriteLine("Melhor Nota: {0}", melhorAvaliacao?.Nota);
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "GEO", 8));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "MAT", 7));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "HIS", 9));
 
-                marty.AdicionarAvaliacao(new Avaliacao(1, "GEO", 8));
-                marty.AdicionarAvaliacao(new Avaliacao(1, "MAT", 6));
-                marty.AdicionarAvaliacao(new Avaliacao(1, "HIS", 7));
-
-                melhorAvaliacao = GetMelhorNota(marty);
-
-                Console.WriteLine("Melhor Nota: {0}", melhorAvaliacao?.Nota);
-
-                foreach (var avaliacao in marty.Avaliacoes)
+                foreach (var avaliacao in aluno.Avaliacoes)
                 {
-                    Console.WriteLine(avaliacao);
+                    Console.WriteLine(avaliacao.ToString());
                 }
 
-                marty.PropertyChanged += (sender, eventArgs) =>
-                {
-                    Console.WriteLine($"Propriedade {eventArgs.PropertyName} mudou!");
-                };
-                marty.Endereco = "novo endereço";
-                marty.Telefone = "7777777";
+                ImprimirMelhorNota(aluno);
 
-                //Aluno biff = new Aluno("Biff", "");
+                Aluno aluno2 = new Aluno("Bart", "Simpson");
+                await logAplicacao.WriteLineAsync("Aluno Bart Simpson foi criado...");
+                ImprimirMelhorNota(aluno2);
 
-                ListaDeMatricula alunos = new ListaDeMatricula
-                {
-                    new Aluno("Lessie", "Crosby"),
-                    new Aluno("Vicki", "Petty"),
-                    new Aluno("Ofelia", "Hobbs"),
-                    new Aluno("Leah", "Kinney"),
-                    new Aluno("Alton", "Stoker"),
-                    new Aluno("Luella", "Ferrell"),
-                    new Aluno("Marcy", "Riggs"),
-                    new Aluno("Ida", "Bean"),
-                    new Aluno("Ollie", "Cottle"),
-                    new Aluno("Tommy", "Broadnax"),
-                    new Aluno("Jody", "Yates"),
-                    new Aluno("Marguerite", "Dawson"),
-                    new Aluno("Francisca", "Barnett"),
-                    new Aluno("Arlene", "Velasquez"),
-                    new Aluno("Jodi", "Green"),
-                    new Aluno("Fran", "Mosley"),
-                    new Aluno("Taylor", "Nesmith"),
-                    new Aluno("Ernesto", "Greathouse"),
-                    new Aluno("Margret", "Albert"),
-                    new Aluno("Pansy", "House"),
-                    new Aluno("Sharon", "Byrd"),
-                    new Aluno("Keith", "Roldan"),
-                    new Aluno("Martha", "Miranda"),
-                    new Aluno("Kari", "Campos"),
-                    new Aluno("Muriel", "Middleton"),
-                    new Aluno("Georgette", "Jarvis"),
-                    new Aluno("Pam", "Boyle"),
-                    new Aluno("Deena", "Travis"),
-                    new Aluno("Cary", "Totten"),
-                    new Aluno("Althea", "Goodwin")
-                };
+                aluno.PropertyChanged += Aluno_PropertyChanged;
 
-                Console.WriteLine();
-                Console.WriteLine("ALUNOS DA TURMA");
-                Console.WriteLine("===============");
-                foreach (var aluno in alunos)
-                {
-                    Console.WriteLine(aluno.DadosPessoais);
-                }
+                aluno.Endereco = "Rua Vergueiro, 3185";
+                aluno.Telefone = "555-1234";
+
+                Aluno aluno3 = new Aluno("Charlie", "");
+                await logAplicacao.WriteLineAsync("Aluno Charlie Brown foi criado...");
+
             }
             catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
             {
-                Console.WriteLine($"ERRO: O parâmetro '{exc.ParamName}' não foi informado!");
-                await logger.WriteLineAsync("Erro: " + exc.ToString());
+                string msg = $"Parâmetro {exc.ParamName} não foi informado!";
+                await logAplicacao.WriteLineAsync(msg);
+                Console.WriteLine(msg);
+            }
+            catch (ArgumentException exc)
+            {
+                const string msg = "Parâmetro com problema!";
+                await logAplicacao.WriteLineAsync(msg);
+                Console.WriteLine(msg);
             }
             catch (Exception exc)
             {
+                await logAplicacao.WriteLineAsync(exc.ToString());
                 Console.WriteLine(exc.ToString());
-                await logger.WriteLineAsync(exc.ToString());
             }
             finally
             {
-                await logger.WriteLineAsync("O programa terminou.");
-                logger.Dispose();
+                await logAplicacao.WriteLineAsync("Aplicação terminou.");
+                logAplicacao.Dispose();
             }
         }
 
-        private static Avaliacao GetMelhorNota(Aluno marty)
+        private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            return marty.Avaliacoes
-                .OrderByDescending(a => a.Nota)
-                .FirstOrDefault();
-        }
-    }
-
-    class ListaDeMatricula : IEnumerable<Aluno>
-    {
-        private List<Aluno> todosAlunos = new List<Aluno>();
-
-        public void Matricular(Aluno s)
-        {
-            todosAlunos.Add(s);
+            Console.WriteLine($"Propriedade {e.PropertyName} foi alterada!");
         }
 
-        public IEnumerator<Aluno> GetEnumerator()
+        private static void ImprimirMelhorNota(Aluno aluno)
         {
-            return ((IEnumerable<Aluno>)todosAlunos).GetEnumerator();
+            Console.WriteLine("Melhor nota: {0}",
+                aluno?.MelhorAvaliacao?.Nota);
         }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable<Aluno>)todosAlunos).GetEnumerator();
-        }
-    }
-
-    static class AlunoExtensions
-    {
-        public static void Add(this ListaDeMatricula e, Aluno s)
-            => e.Matricular(s);
-    }
-
-    public enum Ano
-    {
-        Primeiro,
-        Segundo,
-        Terceiro,
-        Quarto
     }
 
     class Aluno : INotifyPropertyChanged
     {
         public string Nome { get; }
+
         public string Sobrenome { get; }
 
         private string endereco;
+
         public string Endereco
         {
             get { return endereco; }
@@ -176,80 +115,66 @@ namespace CSharp6.R11
                 if (endereco != value)
                 {
                     endereco = value;
-                    PropertyChanged.Call(this);
-                    PropertyChanged.Call(this, nameof(DadosPessoais));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
 
+        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private string telefone;
+
         public string Telefone
         {
             get { return telefone; }
             set
             {
-                if (endereco != value)
+                if (telefone != value)
                 {
                     telefone = value;
-                    PropertyChanged.Call(this);
-                    PropertyChanged.Call(this, nameof(DadosPessoais));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
 
+
+        public string DadosPessoais =>
+                 $"Nome: {NomeCompleto}, Endereço: {Endereco}, Telefone: {Telefone}, Data de Nascimento: {DataNascimento:dd/MM/yyyy}";
+
         public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1);
 
-        public Ano AnoNaEscola { get; set; } = Primeiro;
+        public string NomeCompleto => Nome + " " + Sobrenome;
 
-        public int PontosDeExperiencia()
-        {
-            switch (AnoNaEscola)
-            {
-                case Primeiro:
-                    return 0;
-                case Segundo:
-                    return 15;
-                case Terceiro:
-                    return 65;
-                case Quarto:
-                    return 80;
-                default:
-                    return 0;
-            }
-        }
+        public int GetIdade()
+            => (int)(((Now - DataNascimento).TotalDays) / 365.242199);
 
         public Aluno(string nome, string sobrenome)
         {
-            VerificarParametro(nome, nameof(nome));
-            VerificarParametro(sobrenome, nameof(sobrenome));
+            VerificarParametroPreenchido(nome, nameof(nome));
+            VerificarParametroPreenchido(sobrenome, nameof(sobrenome));
 
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
+            Nome = nome;
+            Sobrenome = sobrenome;
         }
 
-        private static void VerificarParametro(string valorDoParametro, string nomeDoParametro)
+        private static void VerificarParametroPreenchido(string valorParametro, string nomeParametro)
         {
-            if (string.IsNullOrEmpty(valorDoParametro))
+            if (IsNullOrEmpty(valorParametro))
             {
-                throw new ArgumentException("Parâmetro não informado", nomeDoParametro);
+                throw new ArgumentException("Parâmetro não informado!", nomeParametro);
             }
         }
 
-        public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento) :
+            this(nome, sobrenome)
         {
             this.DataNascimento = dataNascimento;
         }
-
-        public string NomeCompleto => $"{Nome} {Sobrenome}";
-
-        public int GetIdade()
-            => (int)((Now - DataNascimento).TotalDays / 365.242199);
-
-        public string DadosPessoais =>
-            $"Nome: {NomeCompleto}, " +
-            $"Nascimento: {DataNascimento:dd/MM/yyyy}, " +
-            $"Endereço: {Endereco}, " +
-            $"Telefone: {Telefone}";
 
         private IList<Avaliacao> avaliacoes = new List<Avaliacao>();
 
@@ -263,21 +188,8 @@ namespace CSharp6.R11
             avaliacoes.Add(avaliacao);
         }
 
-    }
-
-
-
-
-    static class PropertyChangedExtensions
-    {
-        public static void Call(this PropertyChangedEventHandler handler,
-            object sender, [CallerMemberName] string propertyName = null)
-        {
-            if (handler != null)
-            {
-                handler.Invoke(sender, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        public Avaliacao MelhorAvaliacao =>
+            avaliacoes.OrderBy(a => a.Nota).LastOrDefault();
     }
 
     class Avaliacao
@@ -293,21 +205,21 @@ namespace CSharp6.R11
             ["BIO"] = "Biologia"
         };
 
-        public Avaliacao(int bimestre, string materia, double nota)
+        public Avaliacao(int bimestre, string codigoMateria, double nota)
         {
             Bimestre = bimestre;
-            Materia = materia;
+            CodigoMateria = codigoMateria;
             Nota = nota;
         }
 
         public int Bimestre { get; }
-        public string Materia { get; }
+        public string CodigoMateria { get; }
         public double Nota { get; }
 
         public override string ToString()
         {
-            return $"Bimestre: {Bimestre} - Matéria: {materias[Materia]} - Nota: {Nota}";
+            return $"Bimestre: {Bimestre}, Materia: {materias[CodigoMateria]}" +
+                $", Nota: {Nota}";
         }
     }
-
 }
