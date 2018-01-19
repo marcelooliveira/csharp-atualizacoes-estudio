@@ -39,9 +39,15 @@ namespace CSharp6.R10
                 WriteLine("Idade: {0}", aluno.GetIdade());
                 WriteLine(aluno.DadosPessoais);
 
-                aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
-                aluno.AdicionarAvaliacao(new Avaliacao(1, "Matemática", 7));
-                aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "GEO", 8));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "MAT", 7));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "HIS", 9));
+
+                foreach (var avaliacao in aluno.Avaliacoes)
+                {
+                    Console.WriteLine(avaliacao.ToString());
+                }
+
                 ImprimirMelhorNota(aluno);
 
                 Aluno aluno2 = new Aluno("Bart", "Simpson");
@@ -188,15 +194,32 @@ namespace CSharp6.R10
 
     class Avaliacao
     {
-        public Avaliacao(int bimestre, string materia, double nota)
+        Dictionary<string, string> materias = new Dictionary<string, string>
+        {
+            ["MAT"] = "Matemática",
+            ["LPL"] = "Língua Portuguesa",
+            ["FIS"] = "Física",
+            ["HIS"] = "História",
+            ["GEO"] = "Geografia",
+            ["QUI"] = "Química",
+            ["BIO"] = "Biologia"
+        };
+
+        public Avaliacao(int bimestre, string codigoMateria, double nota)
         {
             Bimestre = bimestre;
-            Materia = materia;
+            CodigoMateria = codigoMateria;
             Nota = nota;
         }
 
         public int Bimestre { get; }
-        public string Materia { get; }
+        public string CodigoMateria { get; }
         public double Nota { get; }
+
+        public override string ToString()
+        {
+            return $"Bimestre: {Bimestre}, Materia: {materias[CodigoMateria]}" +
+                $", Nota: {Nota}";
+        }
     }
 }
